@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Notification') {
             steps {
-                telegramSend(message: 'Deploying only on MASTER succesfull')
+                telegramSend(message: 'Deploying only on MASTER succesfull', chatId: -1001557268181)
             }
         }
     }
