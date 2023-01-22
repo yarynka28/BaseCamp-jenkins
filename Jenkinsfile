@@ -16,11 +16,13 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo 'Deploying only on MASTER'
+                echo 'Deploying only on MASTER..'
             }
         }
         stage('Notification') {
-            echo 'Notification TelegramBot'
+            steps {
+                echo 'Notification TelegramBot..'
+            }
         }
         
     }
