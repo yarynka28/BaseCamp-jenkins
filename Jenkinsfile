@@ -20,8 +20,16 @@ pipeline {
             }
         }
         stage('Notification') {
-            steps {
-                telegramSend(message: 'Deploying only on MASTER succesfull', chatId: -1001557268181)
+            echo 'Notification TelegramBot'
+        }
+        
+    }
+    post {
+        always {
+            withCredentials([string(credentialsId: 'TOKEN_ID', variable: 'TOKEN_ID'), string(credentialsId: 'CHAT_ID', variable: 'CHAT_ID')]) {
+                sh  ("""
+                curl -s -X POST https://api.telegram.org/bot${TOKEN_ID}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Branch*: ${env.BRANCH_NAME} *Build* ${env.BUILD_NUMBER} *Result* ${currentBuild.currentResult}'
+                """)
             }
         }
     }
