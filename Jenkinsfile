@@ -22,7 +22,7 @@ pipeline {
         stage('Notification') {
             steps {
                 sh  ("""
-                curl -s -X POST https://api.telegram.org/bot${TOKENID}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Branch*: ${env.BRANCH_NAME} *Build* ${env.BUILD_NUMBER} *Result* ${currentBuild.currentResult}'
+                curl -s -X POST https://api.telegram.org/bot5967703246:AAHBDJQTLJwifrbJCQxC6Ott-8inb3mkpdI/sendMessage -d chat_id=-1001557268181 -d parse_mode=markdown -d text='*Branch*: ${env.BRANCH_NAME} *Build* ${env.BUILD_NUMBER} *Result* ${currentBuild.currentResult}'
                 """)
             }
         }
