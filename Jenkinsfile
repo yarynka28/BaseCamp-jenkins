@@ -30,7 +30,7 @@ pipeline {
         always {
             withCredentials([string(credentialsId: 'TOKEN_ID', variable: 'TOKEN_ID'), string(credentialsId: 'CHAT_ID', variable: 'CHAT_ID')]) {
                 sh  ("""
-                curl -s -X POST https://api.telegram.org/bot${TOKEN_ID}/sendMessage -d chat_id=${CHAT_ID} -d text='gggg'
+                curl -s -X POST https://api.telegram.org/bot$TOKEN_ID/sendMessage -d chat_id=$CHAT_ID -d text='gggg'
                 """)
             }
         }
