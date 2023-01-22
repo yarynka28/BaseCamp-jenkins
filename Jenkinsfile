@@ -21,9 +21,7 @@ pipeline {
         }
         stage('Notification') {
             steps {
-                sh  ("""
-                curl -s -X POST https://api.telegram.org/bot${TOKENID}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Branch*: ${env.BRANCH_NAME} *Build* ${env.BUILD_NUMBER} *Result* ${currentBuild.currentResult}'
-                """)
+                telegramSend(message: 'Deploying only on MASTER succesfull', chatId: -1001557268181)
             }
         }
     }
