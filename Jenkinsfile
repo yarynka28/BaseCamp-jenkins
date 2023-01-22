@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment{
+        TOKEN = credentials('TOKEN_ID')
+        CHAT = credentials('CHAT_ID')
+    }
     stages {
         stage('Build') {
             steps {
@@ -16,15 +20,14 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo 'Deploying only on MASTER'
+                echo 'Deploying only on MASTER..'
             }
         }
         stage('Notification') {
             steps {
-                sh  ("""
-                curl -s -X POST https://api.telegram.org/bot${TOKENID}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Branch*: ${env.BRANCH_NAME} *Build* ${env.BUILD_NUMBER} *Result* ${currentBuild.currentResult}'
-                """)
+                bat  ('curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT} -d text="Successful deployment on MASTER branch"')
+                }
             }
         }
+        
     }
-}
