@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Notification') {
             steps {
-                bat  ('curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT} -d text="Successful deployment on DEV branch"')
+                bat  ('curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage -d chat_id=$CHAT -d text="Successful deployment on DEV branch"')
                 }
             }
         }
