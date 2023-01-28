@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment{
-        TOKEN = credentials('TOKEN_ID')
-        CHAT = credentials('CHAT_ID')
+        TOKEN_ID = credentials("botId")
+        CHAT_ID = credentials("chatId")
     }
     stages {
         stage('Build') {
@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Notification') {
             steps {
-                bat  ('curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage -d chat_id=$CHAT -d text="Successful deployment on DEV branch"')
+                bat  ("curl -s -X POST https://api.telegram.org/bot${TOKEN_ID}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Full project name*: ${env.JOB_NAME} \n*Branch*: [$GIT_BRANCH]($GIT_URL) \n*Build* : [OK](${BUILD_URL}consoleFull)'")
                 }
             }
         }
